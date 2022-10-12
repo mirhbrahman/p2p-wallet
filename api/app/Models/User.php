@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // Default const
+    public const CURRENCY_USD = "usd";
+    public const CURRENCY_EUR = "eur";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'default_currency'
     ];
 
     /**
