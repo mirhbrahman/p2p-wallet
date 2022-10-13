@@ -25,9 +25,12 @@ class AuthService extends BaseService{
      */
     public function login(array $credentials): array
     {
+        // Auth check
         if (!auth()->attempt($credentials)) {
-            throw new AuthenticationException();
+            throw new AuthenticationException("Invalid email or password!");
         }
+
+        // Return user token and info
         $user = auth()->user();
         return [
             "token_type" => "Bearer",
