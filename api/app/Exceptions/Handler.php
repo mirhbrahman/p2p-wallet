@@ -3,10 +3,12 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\ErrorHandler\Exception\FlattenException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -47,24 +49,28 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+           return response()->error('Not found', [], $e->getStatusCode());
+        });
+
+        $this->renderable(function (ValidationException $e, $request) {
+            $errors = $e->validator->errors()->getMessages();
+            return response()->error($e->getMessage(), $errors, Response::HTTP_UNPROCESSABLE_ENTITY);
+        });
+
+        $this->renderable(function (AuthenticationException $e, $request) {
+            return response()->error($e->getMessage(), [], Response::HTTP_UNAUTHORIZED);
+        });
+
+
+        // .............will handle more exception
+        $this->renderable(function (Exception $e, $request) {
+            $fe = FlattenException::create($e);
+            return response()->error($fe->getMessage(), [], $fe->getStatusCode());
+        });
+
         $this->reportable(function (Throwable $e) {
             //
         });
-    }
-
-    public function render($request, Exception|Throwable $e): JsonResponse
-    {
-        if ($e instanceof ValidationException) {
-            return $this->convertValidationExceptionToResponse($e, $request);
-        }
-
-        parent::render();
-    }
-
-    protected function convertValidationExceptionToResponse(ValidationException $e, $request): JsonResponse
-    {
-        $errors = $e->validator->errors()->getMessages();
-
-        return response()->error($e->getMessage(), $errors,422);
     }
 }
