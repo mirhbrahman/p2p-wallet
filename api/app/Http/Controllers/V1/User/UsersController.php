@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\V1\User;
 
-use App\Exceptions\NoDataFound;
+use App\Exceptions\NoDataFoundException;
 use App\Http\Controllers\Controller;
 use App\Services\V1\User\UserService;
 use Illuminate\Http\JsonResponse;
@@ -18,15 +18,15 @@ class UsersController extends Controller
     }
 
     /**
-     * @route   POST api/v1/users/list
+     * @route   GET api/v1/users/list
      * @desc    Return all user except auth user
      * @access  Private
-     * @throws NoDataFound
+     * @throws NoDataFoundException
      */
     public function list(): JsonResponse
     {
         $users = $this->userService->list();
-        if (!count($users)) throw new NoDataFound();
+        if (!count($users)) throw new NoDataFoundException();
 
         return response()->success(
             'User list.',

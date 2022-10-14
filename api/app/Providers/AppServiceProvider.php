@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\V1\ExchangeApi\ExchangeApiService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Response;
@@ -16,7 +17,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(ExchangeApiService::class, function ($app) {
+            return new ExchangeApiService(
+                config('services.exchange.currencylayer.api'),
+                config('services.exchange.currencylayer.key')
+            );
+        });
     }
 
     /**

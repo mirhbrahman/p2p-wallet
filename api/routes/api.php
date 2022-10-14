@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\V1\Auth\AuthController;
+use App\Http\Controllers\V1\Transfer\TransferController;
 use App\Http\Controllers\V1\User\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,14 @@ Route::prefix('v1')->group(function (){
     Route::middleware('auth:sanctum')->group(function () {
         // User module
         Route::prefix('users')->group(function(){
-            Route::post('/list', [UsersController::class, 'list']);
+            // Get user list
+            Route::get('/list', [UsersController::class, 'list']);
+        });
+
+        // Transfer module
+        Route::prefix('transfer')->group(function(){
+            // Send money
+            Route::post('/send', [TransferController::class, 'send']);
         });
     });
 

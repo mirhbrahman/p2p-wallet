@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class NoDataFound extends Exception
+class NoDataFoundException extends Exception
 {
     public function __construct(string $message="No data found!")
     {
