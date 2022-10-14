@@ -62,6 +62,10 @@ class Handler extends ExceptionHandler
             return response()->error($e->getMessage(), [], Response::HTTP_UNAUTHORIZED);
         });
 
+        $this->renderable(function (NoDataFound $e, $request) {
+            return response()->error($e->getMessage(), [], Response::HTTP_NOT_FOUND);
+        });
+
 
         // .............will handle more exception
         $this->renderable(function (Exception $e, $request) {
