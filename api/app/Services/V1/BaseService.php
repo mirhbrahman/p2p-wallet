@@ -13,4 +13,9 @@ class BaseService
         $this->model = $model;
     }
 
+    public function authUser()
+    {
+        return auth('sanctum')->user();
+    }
+
 }

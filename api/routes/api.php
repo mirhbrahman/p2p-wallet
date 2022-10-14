@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\V1\Auth\AuthController;
+use App\Http\Controllers\V1\User\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,13 +18,20 @@ use Illuminate\Support\Facades\Route;
 
 // Routes for API-v1
 Route::prefix('v1')->group(function (){
+    // PUBLIC ROUTES
     // Routes for authenticate
     Route::prefix('auth')->group(function(){
         Route::post('login', [AuthController::class, 'login']);
     });
 
+    // PRIVATE ROUTES
+    Route::middleware('auth:sanctum')->group(function () {
+        // User module
+        Route::prefix('users')->group(function(){
+            Route::post('/list', [UsersController::class, 'list']);
+        });
+    });
+
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+

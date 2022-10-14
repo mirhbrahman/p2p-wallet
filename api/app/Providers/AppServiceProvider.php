@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Response::macro('success', function (string $message, array $data = [], int $status_code = 200): JsonResponse {
+        Response::macro('success', function (string $message, array|AnonymousResourceCollection $data = [], int $status_code = 200): JsonResponse {
             return response()->json([
                 'success' => true,
                 'message' => $message,
