@@ -13,5 +13,5 @@
 ## Client:
 <ul>
      <li>Run command 'npm install'</li>
-     <li>Run command 'npm run dev'</li>
+     <li>Run command 'npm start'</li>
 </ul>
