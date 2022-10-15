@@ -3,8 +3,8 @@
 namespace App\Services\V1\Transfer;
 
 use App\Exceptions\OwnAccountException;
-use App\Http\Resources\V1\UserResource;
 use App\Models\V1\Transaction;
+use App\Notifications\AccountCredited;
 use App\Services\V1\BaseService;
 use App\Services\V1\ExchangeApi\ExchangeApiService;
 use App\Services\V1\User\UserService;
@@ -35,7 +35,7 @@ class TransferService extends BaseService
         if ($account_no == $current_user->email) {
             throw new OwnAccountException();
         }
-        // If needed to multiple method put it on constructor
+        // If needed to multiple methods put it on constructor
         $userService = app(UserService::class);
         // Get account
         $send_to = $userService->getAccountByAccountNo($account_no);
@@ -60,6 +60,10 @@ class TransferService extends BaseService
             $current_user->total_conversion += 1;
             $current_user->save();
             DB::commit();
+
+            // Send mail
+            // TODO: add queueable mail
+            $send_to->notify(new AccountCredited($data));
 
             // Modify later
             return true;
