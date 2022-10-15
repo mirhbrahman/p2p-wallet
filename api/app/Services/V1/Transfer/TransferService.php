@@ -67,13 +67,5 @@ class TransferService extends BaseService
             DB::rollBack();
             throw $e;
         }
-
-        // Return response
-
-
-        // Get user except auth user
-        $users = $this->model::where('id', '!=', $this->authUser()->id)->get();
-
-        return UserResource::collection($users);
     }
 }
