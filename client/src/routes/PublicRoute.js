@@ -1,5 +1,5 @@
 import Home from "../pages/public/Home";
-import Dashboard from "../pages/user/Dashboard";
+import NotFound from "../pages/utils/NotFound";
 
 export const PublicRoute = [
     {
@@ -7,7 +7,7 @@ export const PublicRoute = [
         element: <Home />,
     },
     {
-        path: "/dashboard",
-        element: <Dashboard />,
+        path: "*",
+        element: <NotFound />,
     }
 ];

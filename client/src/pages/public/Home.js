@@ -1,12 +1,15 @@
-import React from "react";
-import { Row, Col, Spinner } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Row, Col, Spinner, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { capitalize } from "../../utils/helpers";
+import { useSelector } from "react-redux";
 
 import "./public.css";
 import HomeBGImage from '../../assets/images/home.jpg';
+import { useLoginMutation } from "../../features/auth/authApi";
 
 
 // Validation schema
@@ -16,16 +19,38 @@ const schema = yup.object({
 }).required();
 
 const Home = () => {
+    // Local state
+    const authUser = useSelector((state) => state.auth.user);
+    const [login, { data, isLoading, isSuccess, isError, error: responseError }] =
+        useLoginMutation();
+    const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
 
     // Handle form validation
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(schema)
     });
 
+    // Handle form submit
     const onSubmit = (data, e) => {
-
-        console.log(data)
+        login({
+            email: data.email,
+            password: data.password,
+        });
     }
+
+
+    useEffect(() => {
+        setErrorMessage(responseError?.data.message);
+
+        if (authUser) {
+            navigate("/dashboard");
+        }
+
+        if (data?.data && data?.data?.token) {
+            navigate("/dashboard");
+        }
+    }, [responseError, data, navigate, authUser]);
 
     return (
         <div className="package-details-warper p-80">
@@ -59,7 +84,12 @@ const Home = () => {
                                 placeholder="Password"
                             />
                             <p className="error-txt">{capitalize(errors.password?.message)}</p>
-                            <button type="submit" className="main-btn" ><Spinner animation="border" size="sm" /> Login</button>
+                            {isError && (
+                                <Alert key="error" variant="danger">
+                                    {errorMessage}
+                                </Alert>
+                            )}
+                            <button type="submit" className="main-btn" >{isLoading && (<Spinner animation="border" size="sm" />)} Login</button>
                         </form>
                     </div>
                 </Col>
