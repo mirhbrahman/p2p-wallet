@@ -41,7 +41,8 @@ class UserService extends BaseService
 
         return [
             'most_conversion_user' => new UserResource($most_conversion_user),
-            'total_converted' => $transferService->totalConverted($this->authUser()->id)
+            'total_converted' => $transferService->totalConverted($this->authUser()->id),
+            'third_highest_transaction' => $transferService->thirdHighestTransaction($this->authUser()->id)
         ];
     }
 

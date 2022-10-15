@@ -73,8 +73,22 @@ class TransferService extends BaseService
         }
     }
 
+    /**
+     * @param int $id
+     * @return float
+     */
     public function totalConverted(int $id): float
     {
         return $this->model::where('sender_id', $id)->sum('send_amount');
+    }
+
+    /**
+     * @param int $id
+     * @return float
+     */
+    public function thirdHighestTransaction(int $id): float
+    {
+        $data = DB::select(DB::raw("select max(send_amount) as amount from transactions where sender_id = {$id} and send_amount < (select max(send_amount) from transactions where sender_id = {$id} and send_amount < (select max(send_amount) from transactions where sender_id = {$id}))"));
+        return $data[0]->amount ?? 0;
     }
 }
