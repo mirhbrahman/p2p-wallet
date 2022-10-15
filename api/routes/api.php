@@ -31,6 +31,8 @@ Route::prefix('v1')->group(function (){
         Route::prefix('users')->group(function(){
             // Get user list
             Route::get('/list', [UsersController::class, 'list']);
+            // Get stats
+            Route::get('/stats', [UsersController::class, 'stats']);
         });
 
         // Transfer module

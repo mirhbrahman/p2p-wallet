@@ -72,4 +72,9 @@ class TransferService extends BaseService
             throw $e;
         }
     }
+
+    public function totalConverted(int $id): float
+    {
+        return $this->model::where('sender_id', $id)->sum('send_amount');
+    }
 }

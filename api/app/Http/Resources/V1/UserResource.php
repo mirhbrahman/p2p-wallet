@@ -18,7 +18,8 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'default_currency' => $this->default_currency
+            'default_currency' => $this->default_currency,
+            'total_conversion' => $this->total_conversion
         ];
     }
 }

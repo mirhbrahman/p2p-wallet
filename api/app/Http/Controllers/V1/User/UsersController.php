@@ -33,4 +33,21 @@ class UsersController extends Controller
             $users
         );
     }
+
+    /**
+     * @route   GET api/v1/users/stats
+     * @desc    Return stats
+     * @access  Private
+     * @throws NoDataFoundException
+     */
+    public function stats(): JsonResponse
+    {
+        $data = $this->userService->stats();
+        if (!count($data)) throw new NoDataFoundException();
+
+        return response()->success(
+            'User stats.',
+            $data
+        );
+    }
 }
