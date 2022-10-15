@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&display=swap");
+
+.p-80 {
+  padding: 80px 0px;
+}
+.heading {
+  margin-bottom: 40px;
+}
+.heading p {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1em;
+  font-family: "Barlow Condensed", sans-serif;
+  color: #07b1d3;
+  text-transform: uppercase;
+}
+
+.heading h2 {
+  color: #082740;
+  font-size: 48px;
+  font-weight: 600;
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+/**Responsive**/
+
+@media only screen and (max-width: 767.98px) {
+  .p-80 {
+    padding: 60px 0px;
+  }
+  .heading h2 {
+    font-size: 38px;
+  }
+  .heading p {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .heading h2 {
+    font-size: 34px;
+  }
+}
+
+.main-btn {
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 35px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+  background-color: #07b1d3 !important;
+  border: none;
+  text-transform: capitalize;
+  font-family: "Barlow Condensed", sans-serif;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* .main-btn:hover {
+  background-color: #082740;
+} */
+
+@media only screen and (max-width: 575.98px) {
+  .main-btn {
+    height: 45px;
+    line-height: 45px;
+    padding: 0px 30px;
+  }
+}

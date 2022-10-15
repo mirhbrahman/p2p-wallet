@@ -32,7 +32,7 @@ class AuthService extends BaseService{
 
         // Return user token and info
         $user = $this->authUser();
-        // Revoke all previous tokens...
+        // Revoke all previous tokens
         if($user->tokens){
             $user->tokens()->delete();
         }

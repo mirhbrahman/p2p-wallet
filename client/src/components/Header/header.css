@@ -1,0 +1,46 @@
+.navbar-brand a {
+    font-size: 40px;
+    font-weight: 700;
+    font-family: "Barlow Condensed", sans-serif;
+    color: #07b1d3 !important;
+    text-decoration: none;
+  }
+  
+  .navbar-warper .nav-link {
+    color: #9ca3a9 !important;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: "Barlow Condensed", sans-serif;
+    text-transform: uppercase;
+    padding: 0px 15px !important;
+    transition: all 0.5s;
+  }
+  .navbar-warper .nav-link:last-child {
+    padding-right: 0px !important;
+  }
+  
+  .navbar-warper .nav-link:hover {
+    color: #07b1d3 !important;
+  }
+  .navbar-warper .nav-link.active {
+    color: #07b1d3 !important;
+  }
+  .navbar-warper .navbar-collapse {
+    justify-content: end;
+    color: 082740;
+  }
+  
+  /**Responsive**/
+  
+  @media only screen and (max-width: 1199.98px) {
+    .navbar-warper .nav-link {
+      font-size: 16px;
+      padding: 0px 10px !important;
+    }
+  }
+  
+  @media only screen and (max-width: 991.98px) {
+    .navbar-warper .nav-link {
+      padding: 6px 0px !important;
+    }
+  }
