@@ -10,7 +10,7 @@
      <li>Run 'php artisan serve'</li>
 </ul>
 
-# Client:
+## Client:
 <ul>
      <li>Run command 'npm install'</li>
      <li>Run command 'npm run dev'</li>
