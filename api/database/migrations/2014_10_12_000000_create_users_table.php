@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('default_currency', 3)->index();
+            $table->integer('total_conversion')->index()->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

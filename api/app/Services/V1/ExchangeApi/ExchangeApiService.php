@@ -31,8 +31,8 @@ class ExchangeApiService extends BaseService implements ExchangeApiInterface
     {
         $response = Http::withHeaders([
             "Content-Type" => "application/json",
-            "apikey" => "jgczpDgYj590zlaIZcIvsOf8Y8HRdwug"
-        ])->get('https://api.apilayer.com/currency_data/convert', [
+            "apikey" => $this->api_key
+        ])->get("{$this->api_base_url}/currency_data/convert", [
             'to' => $to_currency,
             'from' => $from_currency,
             'amount' => $amount

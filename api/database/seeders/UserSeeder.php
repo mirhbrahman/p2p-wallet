@@ -6,6 +6,7 @@ use App\Models\V1\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class UserSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Clear DB
+        Schema::disableForeignKeyConstraints();
         DB:: table(app(User::class)->getTable())->truncate();
         // Insert default user to DB
         DB::table('users')->insert([

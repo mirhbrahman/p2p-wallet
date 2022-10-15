@@ -32,8 +32,8 @@ return [
     ],
     'exchange' => [
         'currencylayer' => [
-            'api' => 'dddddddddddd',
-            'key' => 'dd'
+            'api' => 'https://api.apilayer.com',
+            'key' => 'ZAWdMOAXL1sahUKsdoRqw0V66ZMgqifZ'
         ]
     ]
 

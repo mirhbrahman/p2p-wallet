@@ -27,11 +27,13 @@ class TransferController extends Controller
      */
     public function send(SendRequest $request): JsonResponse
     {
-        $data = $this->transferService->send($request->account_no, $request->amount);
+        $res = $this->transferService->send($request->account_no, $request->amount);
 
-        return response()->success(
-            'Transfer successful.',
-            $data
-        );
+        if($res){
+            return response()->success(
+                'Transfer successful.',
+                []
+            );
+        }
     }
 }

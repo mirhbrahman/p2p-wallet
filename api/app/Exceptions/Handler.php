@@ -74,7 +74,14 @@ class Handler extends ExceptionHandler
         // .............will handle more exception
         $this->renderable(function (Exception $e, $request) {
             $fe = FlattenException::create($e);
-            return response()->error($fe->getMessage(), [], $fe->getStatusCode());
+
+            if (config('app.env') === 'production'){
+                $message = "Something wrong!";
+            }else{
+                $message = $fe->getMessage();
+            }
+
+            return response()->error($message, [], $fe->getStatusCode());
         });
 
         $this->reportable(function (Throwable $e) {
