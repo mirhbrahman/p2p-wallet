@@ -91,6 +91,10 @@ const Home = () => {
                             )}
                             <button type="submit" className="main-btn" >{isLoading && (<Spinner animation="border" size="sm" />)} Login</button>
                         </form>
+                        <br />
+                        <p className="login-info"><b>Login Info</b></p>
+                        <p className="login-info">User: usera@app.com / userb@app.com</p>
+                        <p className="login-info">Password: 12345678</p>
                     </div>
                 </Col>
             </Row>
