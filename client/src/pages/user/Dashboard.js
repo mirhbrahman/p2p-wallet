@@ -50,7 +50,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <h3>Dashboard</h3>
+            <h3>Dashboard | Welcome {authUser?.name}</h3>
 
             <Row>
                 <Col lg={6}>
