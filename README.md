@@ -10,8 +10,11 @@
      <li>Run 'php artisan serve'</li>
 </ul>
 
-## Client:
+## Client
 <ul>
      <li>Run command 'npm install'</li>
      <li>Run command 'npm start'</li>
 </ul>
+
+## Live URL
+[https://p2p-wallet.netlify.app](https://p2p-wallet.netlify.app)
